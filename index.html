@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+   	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/build/global.js"></script>
+	<script src="js/build/tools.js"></script>
+	<script src="js/build/component.js"></script>
+	<script src="js/build/widget.js"></script>
+	<script src="js/build/ajax.js"></script>
+	<script src="js/build/main.js"></script>
+    <title>new</title>
+</head>
+
+<body>
+<script id="script">
+$(document).ready(function(){
+	var ws = $("body").find("[data-myrole='widget']");
+	for(var i=0;i<ws.length;i++){
+		bindDetailCaller($(ws[i]));
+	}
+})
+</script>
+
+
+<div class="container">
+
+
+	<div id="widgetEditor" class="row" style="display: none;">
+		<div class="accordion span8" id="widgTool">
+			<h4>部件快捷编辑添加器</h4>
+			
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#widgTool" href="#seleWidg">选择部件 </a>
+				</div>
+				<div id="seleWidg" class="accordion-body in collapse" style="height: auto;">
+					<div id="getMsgWidgWidt" class="accordion-inner btn" style="width: 100%">短信息</div>
+					<div id="getArtiWidgWidt" class="accordion-inner btn" style="width: 100%">文章</div>
+					<div id="getPicsWidgWidt" class="accordion-inner btn" style="width: 100%">图片集</div>
+					<div id="getPicsArtiWidgWidt" class="accordion-inner btn" style="width: 100%">图文信息</div>
+				</div>
+			</div>
+			
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="confWidgEdit" class="accordion-toggle btn btn-danger">确定</a>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="cancWidgEdit" class="accordion-toggle btn btn-info">取消</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="span4 pull-right" style="min-height: 100px; border-radius: 10px; box-shadow: 0 0 5px">
+			<h3 class="popover-title">当前部件视图</h3>
+			<div style="min-height: 200px"></div>
+			<h5 id="currWidg" class="popover-title">当前部件：<span></span></h5>
+		</div>
+	</div>
+	<hr>
+
+
+
+	<div id="containerEditor" class="row" style="display: block;">
+
+		<div class="span4 pull-left" style="min-height: 100px; border-radius: 10px; box-shadow: 0 0 5px">
+			<h3 class="popover-title">当前容器视图</h3>
+			<div style="min-height: 200px"></div>
+			<h5 class="popover-title">当前容器</h5>
+		</div>
+
+
+		<div class="accordion span8" id="ContTool">
+			<h4 id="currCont">当前容器id：<span>page</span></h4>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#ContTool" href="#contInfo">容器信息 </a>
+				</div>
+				<div id="contInfo" class="accordion-body collapse">
+					<!--div id="showPareCont" class="accordion-inner btn" style="width: 100%">所在上级容器</div-->
+					<div id="listShel" class="accordion-inner btn" style="width: 100%">拥有容器架</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-danger" data-toggle="collapse" data-parent="#ContTool" href="#contOper">容器操作 </a>
+				</div>
+				<div id="contOper" class="accordion-body collapse">
+					<div id="addShelSelePosi" class="accordion-inner btn" style="width: 100%">新增容器架</div>
+					<div id="deleShel" class="accordion-inner btn" style="width: 100%">删除容器架</div>
+					<div id="selePareCont" class="accordion-inner btn" style="width: 100%">选择上级容器为当前容器</div>
+					<div id="seleCurrShel" class="accordion-inner btn" style="width: 100%">选择当前容器架</div>
+				</div>
+			</div>
+			<h4 id="currShel">当前容器架id：<span>head</span></h4>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-success" data-toggle="collapse" data-parent="#ContTool" href="#shelInfo">当前容器架信息</a>
+				</div>
+				<div id="shelInfo" class="accordion-body collapse">
+					<div id="listContWidg" class="accordion-inner btn" style="width: 100%">子容器（部件）顺序</div>
+
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#ContTool" href="#shelOper">容器架操作 </a>
+				</div>
+				<div id="shelOper" class="accordion-body in collapse" style="height: auto;">
+					<div id="seleCurrCont" class="accordion-inner btn" style="width: 100%">选择当前容器</div>
+					<div id="addContSeleWidt" class="accordion-inner btn" style="width: 100%">在当前容器架上添加新容器</div>
+					<div id="addWidg" class="accordion-inner btn" style="width: 100%">在当前容器架上添加新部件</div>
+					<!--div id="editWidg" class="accordion-inner btn" style="width: 100%">编辑当前容器架上部件</div-->
+					<div id="deleContWidg" class="accordion-inner btn" style="width: 100%">从当前容器架上删除容器（部件）</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<hr>
+	<div id="globalEditor" class="row" style="display: block;">
+
+
+		<div class="accordion span12" id="globTool">
+
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#globTool" href="#setCurrTopCont">选择当前模块</a>
+				</div>
+				<div id="setCurrTopCont" class="accordion-body collapse">
+					<div id="headButton" class="accordion-inner btn" style="width: 100%">页头</div>
+					<div id="footButton" class="accordion-inner btn" style="width: 100%">页尾</div>
+					<div id="bodyButton" class="accordion-inner btn" style="width: 100%">内容页</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-danger" data-toggle="collapse" data-parent="#globTool" href="#setNav">设置导航条</a>
+				</div>
+				<div id="setNav" class="accordion-body collapse">
+					<div class="accordion-inner btn" style="width: 100%">位置</div>
+					<div id="addBodySelePosi" class="accordion-inner btn" style="width: 100%">增加一页</div>
+					<div id="deleBody" class="accordion-inner btn" style="width: 100%">减少一页</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-warning" data-toggle="collapse" data-parent="#globTool" href="#seleBack">设置页面背景</a>
+				</div>
+				<div id="seleBack" class="accordion-body collapse">
+					<div class="accordion-inner btn" style="width: 100%">选择</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="savePage" class="accordion-toggle btn btn-success">存储到服务端</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+
+
+		<div id="page" class="span12">
+
+			<div class="row">
+				<br>
+				<p>导航条</p>
+			</div>
+
+			<div id="nav" class="row" style="background-color: #eeeeee; min-height: 50px; border-radius: 10px; box-shadow: 0 0 5px">
+
+				<ul class="nav nav-tabs">
+				<li class="active" data-mylink="body0"><a href="#body0" data-toggle="tab">body0</a></li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<br>
+				<p>页头</p>
+			</div>
+			<div id="head" class="row" style="background-color: #eeeeee; min-height: 200px; border-radius: 10px; box-shadow: 0 0 5px"></div>
+
+			<div class="row">
+				<br>
+				<p>内容</p>
+			</div>
+			<div class="row" style="background-color: #eeeeee; min-height: 600px; border-radius: 10px; box-shadow: 0 0 5px">
+				<div id="bodyCont" class="span12 tab-content">
+				
+				<div class="tab-pane active row" id="body0" style="min-height: 20px;background-color:#ffffff;text-align:center">
+					body0
+				</div>
+
+				
+				</div>				
+			</div>
+
+			<div class="row">
+				<br>
+				<p>页尾</p>
+			</div>
+			<div id="foot" class="row" style="background-color: #eeeeee; min-height: 200px; border-radius: 10px; box-shadow: 0 0 5px"></div>
+
+		</div>
+
+	</div>
+
+	<hr>
+
+	
+
+</div>
+
+ <!--div id="widgetTemp" style="display: none"></div-->
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalOK" class="btn btn-primary" >确定 </button>
+    <button id="myModalCancel" data-dismiss="modal" style="display:none" class="btn" aria-hidden="true">取消</button>
+  </div>
+</div>
+
+<div id="myModalConfirm" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalConfirmLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalConfirmLabel">请确认</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalConfirmOK" class="btn btn-primary" >确定 </button>
+    <button id="myModalConfirmCancel" data-dismiss="modal" class="btn" aria-hidden="true">取消</button>
+  </div>
+</div>
+
+<div id="myModalDetail" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalDetailLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalDetailLabel">详情</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalDetailOK" data-dismiss="modal" class="btn btn-primary" aria-hidden="true">确定 </button>
+  </div>
+</div>
+
+</body>
+</html>
