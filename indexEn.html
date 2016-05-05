@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+   	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/build/global.js"></script>
+	<script src="js/build/tools.js"></script>
+	<script src="js/build/component.js"></script>
+	<script src="js/build/widget.js"></script>
+	<script src="js/build/ajax.js"></script>
+	<script src="js/build/main.js"></script>
+    <title>new</title>
+</head>
+
+<body>
+<script id="script">
+$(document).ready(function(){
+	var ws = $("body").find("[data-myrole='widget']");
+	for(var i=0;i<ws.length;i++){
+		bindDetailCaller($(ws[i]));
+	}
+})
+</script>
+
+
+<div class="container">
+
+
+	<div id="widgetEditor" class="row" style="display: none;">
+		<div class="accordion span8" id="widgTool">
+			<h4>widget quick editor</h4>
+			
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#widgTool" href="#seleWidg">选择部件 </a>
+				</div>
+				<div id="seleWidg" class="accordion-body in collapse" style="height: auto;">
+					<div id="getMsgWidgWidt" class="accordion-inner btn" style="width: 100%">message</div>
+					<div id="getArtiWidgWidt" class="accordion-inner btn" style="width: 100%">article</div>
+					<div id="getPicsWidgWidt" class="accordion-inner btn" style="width: 100%">pictures</div>
+					<div id="getPicsArtiWidgWidt" class="accordion-inner btn" style="width: 100%">article with pictures</div>
+				</div>
+			</div>
+			
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="confWidgEdit" class="accordion-toggle btn btn-danger">OK</a>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="cancWidgEdit" class="accordion-toggle btn btn-info">cancel</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="span4 pull-right" style="min-height: 100px; border-radius: 10px; box-shadow: 0 0 5px">
+			<h3 class="popover-title">current widget view:</h3>
+			<div style="min-height: 200px"></div>
+			<h5 id="currWidg" class="popover-title">current widget：<span></span></h5>
+		</div>
+	</div>
+	<hr>
+
+
+
+	<div id="containerEditor" class="row" style="display: block;">
+
+		<div class="span4 pull-left" style="min-height: 100px; border-radius: 10px; box-shadow: 0 0 5px">
+			<h3 class="popover-title">current container view:</h3>
+			<div style="min-height: 200px"></div>
+			<h5 class="popover-title">current container:</h5>
+		</div>
+
+
+		<div class="accordion span8" id="ContTool">
+			<h4 id="currCont">current container id：<span>page</span></h4>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#ContTool" href="#contInfo">container informations:</a>
+				</div>
+				<div id="contInfo" class="accordion-body collapse">
+					<div id="listShel" class="accordion-inner btn" style="width: 100%">owner shelves</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-danger" data-toggle="collapse" data-parent="#ContTool" href="#contOper">container opera:</a>
+				</div>
+				<div id="contOper" class="accordion-body collapse">
+					<div id="addShelSelePosi" class="accordion-inner btn" style="width: 100%">add shelf</div>
+					<div id="deleShel" class="accordion-inner btn" style="width: 100%">delete shelf</div>
+					<div id="selePareCont" class="accordion-inner btn" style="width: 100%">selete parent container as current container</div>
+					<div id="seleCurrShel" class="accordion-inner btn" style="width: 100%">selete current shelf</div>
+				</div>
+			</div>
+			<h4 id="currShel">current shelf id：<span>head</span></h4>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-success" data-toggle="collapse" data-parent="#ContTool" href="#shelInfo">current shelf informations</a>
+				</div>
+				<div id="shelInfo" class="accordion-body collapse">
+					<div id="listContWidg" class="accordion-inner btn" style="width: 100%">children containers and widgets in order</div>
+
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-info" data-toggle="collapse" data-parent="#ContTool" href="#shelOper">shelf opera</a>
+				</div>
+				<div id="shelOper" class="accordion-body in collapse" style="height: auto;">
+					<div id="seleCurrCont" class="accordion-inner btn" style="width: 100%">selete current container</div>
+					<div id="addContSeleWidt" class="accordion-inner btn" style="width: 100%">add container in current shelf</div>
+					<div id="addWidg" class="accordion-inner btn" style="width: 100%">add widget in current shelf</div>
+					<div id="deleContWidg" class="accordion-inner btn" style="width: 100%">delete container or widget in current shelf</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<hr>
+	<div id="globalEditor" class="row" style="display: block;">
+
+
+		<div class="accordion span12" id="globTool">
+
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-primary" data-toggle="collapse" data-parent="#globTool" href="#setCurrTopCont">selete current module</a>
+				</div>
+				<div id="setCurrTopCont" class="accordion-body collapse">
+					<div id="headButton" class="accordion-inner btn" style="width: 100%">page head</div>
+					<div id="footButton" class="accordion-inner btn" style="width: 100%">page foot</div>
+					<div id="bodyButton" class="accordion-inner btn" style="width: 100%">page content</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-danger" data-toggle="collapse" data-parent="#globTool" href="#setNav">set nav</a>
+				</div>
+				<div id="setNav" class="accordion-body collapse">
+					<div class="accordion-inner btn" style="width: 100%">position</div>
+					<div id="addBodySelePosi" class="accordion-inner btn" style="width: 100%">add one page</div>
+					<div id="deleBody" class="accordion-inner btn" style="width: 100%">delete one page</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle btn btn-warning" data-toggle="collapse" data-parent="#globTool" href="#seleBack">set background picture</a>
+				</div>
+				<div id="seleBack" class="accordion-body collapse">
+					<div class="accordion-inner btn" style="width: 100%">selete</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a id="savePage" class="accordion-toggle btn btn-success">save to server</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+
+
+		<div id="page" class="span12">
+
+			<div class="row">
+				<br>
+				<p>nav</p>
+			</div>
+
+			<div id="nav" class="row" style="background-color: #eeeeee; min-height: 50px; border-radius: 10px; box-shadow: 0 0 5px">
+
+				<ul class="nav nav-tabs">
+				<li class="active" data-mylink="body0"><a href="#body0" data-toggle="tab">body0</a></li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<br>
+				<p>page head</p>
+			</div>
+			<div id="head" class="row" style="background-color: #eeeeee; min-height: 200px; border-radius: 10px; box-shadow: 0 0 5px"></div>
+
+			<div class="row">
+				<br>
+				<p>page content</p>
+			</div>
+			<div class="row" style="background-color: #eeeeee; min-height: 600px; border-radius: 10px; box-shadow: 0 0 5px">
+				<div id="bodyCont" class="span12 tab-content">
+				
+				<div class="tab-pane active row" id="body0" style="min-height: 20px;background-color:#ffffff;text-align:center">
+					body0
+				</div>
+
+				
+				</div>				
+			</div>
+
+			<div class="row">
+				<br>
+				<p>page foot</p>
+			</div>
+			<div id="foot" class="row" style="background-color: #eeeeee; min-height: 200px; border-radius: 10px; box-shadow: 0 0 5px"></div>
+
+		</div>
+
+	</div>
+
+	<hr>
+
+	
+
+</div>
+
+ <!--div id="widgetTemp" style="display: none"></div-->
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalOK" class="btn btn-primary" >OK</button>
+    <button id="myModalCancel" data-dismiss="modal" style="display:none" class="btn" aria-hidden="true">cancel</button>
+  </div>
+</div>
+
+<div id="myModalConfirm" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalConfirmLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalConfirmLabel">please confirm</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalConfirmOK" class="btn btn-primary" >OK</button>
+    <button id="myModalConfirmCancel" data-dismiss="modal" class="btn" aria-hidden="true">cancel</button>
+  </div>
+</div>
+
+<div id="myModalDetail" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalDetailLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalDetailLabel">detail</h3>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button id="myModalDetailOK" data-dismiss="modal" class="btn btn-primary" aria-hidden="true">OK</button>
+  </div>
+</div>
+
+</body>
+</html>
