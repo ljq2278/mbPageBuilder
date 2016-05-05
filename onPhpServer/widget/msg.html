@@ -1,0 +1,36 @@
+<div data-myrole="widget">
+
+<div data-myrole="thumbnail">
+
+<div data-myrole="thumbnailcontent" style="display:none">
+<!--[msgDisplay]-->
+<button data-myrole="edit" class="btn">编辑</button>
+</div>
+
+<div data-myrole="thumbnaileditor">
+<!--[msgEdit]-->
+<button data-myrole="confirm" class="btn">确定</button>
+</div>
+
+</div>
+
+<script id="tempScript">
+var widget = $("#tempScript").parent();
+$("#tempScript").removeAttr("id");
+
+
+widget.find("[data-myrole='thumbnaileditor']").find("[data-myrole='confirm']").bind(
+		'click',
+		showResult
+);
+
+widget.find("[data-myrole='thumbnailcontent']").find("[data-myrole='edit']").bind(
+		'click',
+		showEditor
+);
+
+
+</script>
+
+</div>
+
