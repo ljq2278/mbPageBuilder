@@ -1,0 +1,78 @@
+<div data-myrole="widget">
+
+<div data-myrole="thumbnail">
+
+<div data-myrole="thumbnailcontent" style="display:none">
+<!--[picDisplayCover]-->
+<button data-myrole="edit" class="btn">编辑</button>
+</div>
+
+<div data-myrole="thumbnaileditor">
+<!--[picEditCover]-->
+<button data-myrole="confirm" class="btn">确定</button>
+</div>
+
+</div>
+<div data-myrole="divider"><hr><hr></div>
+
+<div data-myrole="detail">
+<div data-myrole="detailcontent" style="display:none">
+	<div id="<!--[id]-->" class="carousel slide">
+	  <!-- Carousel items -->
+	  <div class="carousel-inner">
+	     <!--[picDisplayArray]-->
+	  </div>
+	  <!-- Carousel nav -->
+	  <a class="carousel-control left" href="#<!--[id]-->" data-slide="prev">&lsaquo;</a>
+	  <a class="carousel-control right" href="#<!--[id]-->" data-slide="next">&rsaquo;</a>
+	</div>
+	<button data-myrole="edit" class="btn">编辑</button>
+</div>
+
+<div data-myrole="detaileditor">
+<!--[picEditArray]-->
+<button data-myrole="confirm" class="btn">确定</button>
+</div>
+
+</div>
+
+<script id="tempScript">
+var widget = $("#tempScript").parent();
+$("#tempScript").removeAttr("id");
+
+
+widget.find("[data-myrole='thumbnaileditor']").find("[type='file']").bind(
+		'change',
+		createPic
+);
+
+widget.find("[data-myrole='thumbnaileditor']").find("[data-myrole='confirm']").bind(
+		'click',
+		showResult
+);
+
+widget.find("[data-myrole='thumbnailcontent']").find("[data-myrole='edit']").bind(
+		'click',
+		showEditor
+);
+
+widget.find("[data-myrole='detaileditor']").find("[type='file']").bind(
+		'change',
+		createPic
+);
+
+widget.find("[data-myrole='detaileditor']").find("[data-myrole='confirm']").bind(
+		'click',
+		showResult
+);
+
+widget.find("[data-myrole='detailcontent']").find("[data-myrole='edit']").bind(
+		'click',
+		showEditor
+);
+
+
+</script>
+
+</div>
+
