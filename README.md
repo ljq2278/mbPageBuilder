@@ -1,2 +1,2 @@
 # mbPageBuilder
-see guideBook on http://mandelbrot.top/index.php?r=build
+see guideBook on http://mandelbrot.top/publicity/index.php?r=build
